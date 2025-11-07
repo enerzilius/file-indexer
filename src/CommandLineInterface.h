@@ -7,4 +7,5 @@
 class CLI {
 public:
     void start();
+    void processInput(std::string* commands);
 };
