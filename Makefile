@@ -1,2 +1,2 @@
-all: main.cpp ./src/CommandLineInterface.cpp 
-	g++ -o main main.cpp ./src/CommandLineInterface.cpp -I ./src
+all: main.cpp ./src/CommandLineInterface.cpp ./utils/utils.cpp
+	g++ -o main main.cpp ./src/CommandLineInterface.cpp ./utils/utils.cpp
