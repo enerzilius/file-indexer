@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
+#include <unordered_map>
 #include "CommandLineInterface.h"
 #include "../utils/utils.h"
 
 void CLI::start() {
-    std::cout << "Iniciando indexador..." << "\n";
+    std::cout << "Iniciando indexador (por Eber Louback)..." << "\n";
 
     std::string input;
 
@@ -32,10 +33,9 @@ void CLI::processInput(std::vector<std::string> commands) {
     if(commands.size() < 3) {
         std::cout<< "\n [!] Diretório ou termo de busca não específicados...\n";
         std::cout<<"     Use: `indice construir <caminho_do_diretorio>` ou `indice buscar <termo_de_busca>`\n";
+        return;
     }
 
-    std::cout<<commands[2]<<"\n";
- 
     if(commands[1] == "contruir") {
         std::cout<<"\n [construir]: "<<commands[2];
     }
