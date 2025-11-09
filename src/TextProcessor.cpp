@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+
 std::vector<std::string> TextProcessor::processar(std::string texto) {
     std::vector<std::string> processed;
 
@@ -29,6 +30,10 @@ std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
 		return;
 	}
 
-    std::ifstream file(path.string());
+    auto size = std::filesystem::file_size(path);
+    std::string content(size, '\0');
+    std::ifstream in(path);
+    in.read(&content[0], size);
 
+    return content;
 }
