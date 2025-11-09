@@ -6,7 +6,6 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-
 std::vector<std::string> TextProcessor::processar(std::string texto) {
     std::vector<std::string> processed;
 
@@ -19,17 +18,17 @@ std::vector<std::string> TextProcessor::processar(std::string texto) {
     return processed;
 }
 
-// std::string TextProcessor::readTextFile(const fs::path& path) {
-// 	if(!fs::exists(path)) {
-// 		std::cout<<"  [!] Caminho não existe: "<<path.string()<<"\n";
-// 		return;
-// 	}
+std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
+	if(!std::filesystem::exists(path)) {
+		std::cout<<"  [!] Caminho não existe: "<<path.string()<<"\n";
+		return;
+	}
 
-// 	if(!fs::is_regular_file(path)) {
-// 		std::cout<<"  [!] Arquivo imcompatível: "<<path.string()<<"\n";
-// 		return;
-// 	}
+	if(!std::filesystem::is_regular_file(path)) {
+		std::cout<<"  [!] Arquivo imcompatível: "<<path.string()<<"\n";
+		return;
+	}
 
-//     std::ifstream file(path.string());
+    std::ifstream file(path.string());
 
-// }
+}

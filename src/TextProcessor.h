@@ -7,5 +7,5 @@
 class TextProcessor {
 public:
     std::vector<std::string> processar(std::string texto); 
-    // std::string readTextFile(const fs::path& path);
-}
+    std::string readTextFile(const std::filesystem::path& path);
+};
