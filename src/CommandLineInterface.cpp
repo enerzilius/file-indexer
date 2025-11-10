@@ -36,7 +36,7 @@ void CLI::processInput(std::vector<std::string> commands) {
         return;
     }
 
-    if(commands[1] == "contruir") {
+    if(commands[1] == "construir") {
         std::cout<<"\n [construir]: "<<commands[2];
     }
     if(commands[1] == "buscar") {
