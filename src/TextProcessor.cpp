@@ -1,5 +1,4 @@
 #include "TextProcessor.h"
-#include "../utils/utils.h"
 
 #include <vector>
 #include <string>
@@ -40,7 +39,7 @@ std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
     return content;
 }
 
-std::vector<std::string> split(std::string& text, const std::string& delimiter) {
+std::vector<std::string> TextProcessor::split(std::string& text, const std::string& delimiter) {
 	std::vector<std::string> res;
 	int i = 0;
 	while ((i = text.find(delimiter)) != std::string::npos) {
