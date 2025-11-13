@@ -14,6 +14,8 @@ std::vector<std::string> TextProcessor::processar(std::string texto) {
     processed = split(texto,  delimiter);
 
     std::vector<std::string> stopWords;
+
+    
     
 
     return processed;
@@ -36,4 +38,16 @@ std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
     in.read(&content[0], size);
 
     return content;
+}
+
+std::vector<std::string> split(std::string& text, const std::string& delimiter) {
+	std::vector<std::string> res;
+	int i = 0;
+	while ((i = text.find(delimiter)) != std::string::npos) {
+		std::string word = text.substr(0, i);
+		res.push_back(word);
+		text.erase(0, i + delimiter.length());
+	}
+	res.push_back(text);
+	return res;
 }

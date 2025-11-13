@@ -2,12 +2,14 @@
 #include <string>
 #include <unordered_map>
 #include "CommandLineInterface.h"
-#include "../utils/utils.h"
+#include "TextProcessor.h"
 
 void CLI::start() {
     std::cout << "Iniciando indexador (por Eber Louback)..." << "\n";
 
     std::string input;
+
+    TextProcessor textProcessor;
 
     while(true) {
         std::cout<<" >> ";
@@ -15,7 +17,7 @@ void CLI::start() {
         std::cout<<"Executando: \'"<<input<<"\'...\n";
 
         std::string delimiter = " ";
-        std::vector<std::string> splitString = split(input, delimiter);
+        std::vector<std::string> splitString = textProcessor.split(input, delimiter);
 
          processInput(splitString);
         
