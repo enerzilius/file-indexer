@@ -14,9 +14,6 @@ std::vector<std::string> TextProcessor::processar(std::string texto) {
 
     std::vector<std::string> stopWords;
 
-    
-    
-
     return processed;
 }
 
@@ -49,4 +46,17 @@ std::vector<std::string> TextProcessor::split(std::string& text, const std::stri
 	}
 	res.push_back(text);
 	return res;
+}
+
+void TextProcessor::lowerText(std::vector<std::string>& textVector) {
+    for (std::string& word : textVector) {
+        std::cout<<word<<"\n";
+        for(char& c : word) if(c >='A' && c <= 'Z') c = std::tolower(c, std::locale());
+        std::cout<<word<<"\n";
+    }
+    
+}
+
+void TextProcessor::clean(std::vector<std::string>& textVector) {
+    return;
 }

@@ -12,9 +12,13 @@ void CLI::start() {
     TextProcessor textProcessor;
 
     while(true) {
+        std::vector<std::string> vec = {"AAA", "Eeer", "siGmAA"};
+        textProcessor.lowerText(vec);
+        
         std::cout<<" >> ";
         std::getline(std::cin, input);
         std::cout<<"Executando: \'"<<input<<"\'...\n";
+
 
         std::string delimiter = " ";
         std::vector<std::string> splitString = textProcessor.split(input, delimiter);
