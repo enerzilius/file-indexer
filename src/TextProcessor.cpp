@@ -7,10 +7,11 @@
 #include <iostream>
 #include <unordered_set>
 #include <sstream>
+#include <locale>
+#include <codecvt>
 
 std::vector<std::string> TextProcessor::processar(std::filesystem::path path) {
     std::string text = readTextFile(path);
-	std::cout<<text<<"\n-------------------\n";
 
     char delimiter = ' ';
 	std::vector<std::string> processed = split(text, delimiter);
@@ -52,10 +53,19 @@ std::vector<std::string> TextProcessor::split(std::string& text, const char& del
 }
 
 void TextProcessor::lowerText(std::vector<std::string>& textVector) {
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
     for (std::string& word : textVector) {
-        for(char& c : word) if(c >='A' && c <= 'Z') c = std::tolower(c, std::locale());
+		std::wstring ws = conv.from_bytes(word);
+
+		// Lowercase using towlower
+		std::locale loc("C.UTF-8"); // or "pt_BR.UTF-8"
+		for (wchar_t& wc : ws) {
+			wc = std::tolower(wc, loc);
+		}
+
+		// Convert back wide string -> UTF-8
+		word = conv.to_bytes(ws);
     }
-    
 }
 
 void TextProcessor::clean(std::vector<std::string>& textVector) {
