@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <unordered_set>
 
 std::vector<std::string> TextProcessor::processar(std::string texto) {
     std::vector<std::string> processed;
@@ -58,5 +59,15 @@ void TextProcessor::lowerText(std::vector<std::string>& textVector) {
 }
 
 void TextProcessor::clean(std::vector<std::string>& textVector) {
-    return;
+	std::filesystem::path path = "stopwords.txt";
+	std::string rawStopWords = readTextFile(path);
+	std::vector<std::string> stopWords = split(rawStopWords, "\n");
+	std::unordered_set<std::string> stopsHash;
+	for(auto word : stopWords) stopsHash.insert(word);
+	
+	auto it = textVector.begin();
+	while (it != textVector.end()) {
+		if (stopsHash.count(*it) > 0)it = textVector.erase(it);  // erase returns next valid iterator
+		else ++it;
+	}
 }

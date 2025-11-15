@@ -13,7 +13,7 @@ void CLI::start() {
 
     while(true) {
         std::vector<std::string> vec = {"AAA", "Eeer", "siGmAA"};
-        textProcessor.lowerText(vec);
+        textProcessor.clean(vec);
         
         std::cout<<" >> ";
         std::getline(std::cin, input);
