@@ -7,5 +7,5 @@
 class CLI {
 public:
     void start();
-    void processInput(std::vector<std::string> commands);
+    void processInput(std::vector<std::string> commands);    
 };

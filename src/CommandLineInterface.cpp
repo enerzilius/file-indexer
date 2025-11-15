@@ -12,15 +12,20 @@ void CLI::start() {
     TextProcessor textProcessor;
 
     while(true) {
-        std::vector<std::string> vec = {"AAA", "Eeer", "siGmAA"};
-        textProcessor.clean(vec);
+        auto vec = textProcessor.processar("texts/teste.txt");
+        std::cout<<"---------------------\n";
+        for (auto el : vec)
+        {
+            std::cout<<el<<"\n";
+        }
+        
         
         std::cout<<" >> ";
         std::getline(std::cin, input);
         std::cout<<"Executando: \'"<<input<<"\'...\n";
 
 
-        std::string delimiter = " ";
+        const char delimiter = ' ';
         std::vector<std::string> splitString = textProcessor.split(input, delimiter);
 
          processInput(splitString);
