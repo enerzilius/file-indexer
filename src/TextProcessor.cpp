@@ -16,7 +16,7 @@ std::vector<std::string> TextProcessor::processar(std::filesystem::path path) {
     char delimiter = ' ';
 	std::vector<std::string> processed = split(text, delimiter);
 	lowerText(processed);
-	for (auto word : processed) trim(word);
+	for (auto& word : processed) trim(word);
 	clean(processed);
 
 	return processed;
@@ -57,13 +57,11 @@ void TextProcessor::lowerText(std::vector<std::string>& textVector) {
     for (std::string& word : textVector) {
 		std::wstring ws = conv.from_bytes(word);
 
-		// Lowercase using towlower
-		std::locale loc("C.UTF-8"); // or "pt_BR.UTF-8"
+		std::locale loc("C.UTF-8");
 		for (wchar_t& wc : ws) {
 			wc = std::tolower(wc, loc);
 		}
 
-		// Convert back wide string -> UTF-8
 		word = conv.to_bytes(ws);
     }
 }
@@ -72,19 +70,15 @@ void TextProcessor::clean(std::vector<std::string>& textVector) {
 	std::filesystem::path path = "stopwords.txt";
 	std::string rawStopWords = readTextFile(path);
 	std::vector<std::string> stopWords = split(rawStopWords, ' ');
-	for (auto word : stopWords) trim(word);
+	for (auto& word : stopWords) trim(word);
 
 	std::unordered_set<std::string> stopsHash;
-	for(auto word : stopWords) stopsHash.insert(word);
+	for(auto& word : stopWords) stopsHash.insert(word);
 	
 	auto it = textVector.begin();
-	for (auto word : stopsHash) std::cout<<word<<"-";
 
-	std::cout<<"\nmais| "<<stopsHash.count("mais")<<" \n";
 	while (it != textVector.end()) {
-		// std::cout<<*it<<"\n";
 		bool check = *it == "\n" || *it == "";
-		std::cout<<*it<<"| "<<stopsHash.count(*it)<<" \n";
 		if (stopsHash.count(*it) > 0 || check) it = textVector.erase(it);
 		else ++it;
 	} 
