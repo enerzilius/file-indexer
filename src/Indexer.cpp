@@ -15,11 +15,26 @@ Index Indexer::construir(std::filesystem::path diretorio) {
 	}
 
     TextProcessor tp;
-
+    int i = 1;
     for(auto& entry : std::filesystem::directory_iterator(diretorio)) {
         if(!std::filesystem::is_regular_file(entry.path())) continue;
-        tp.processar(entry.path());
+        auto words = tp.processar(entry.path());
+        for(std::string word : words) index.adicionar(word, i);
+        i++;
     }
+
+    for (auto e : index.filesMap)
+    {
+        std::cout<<e.first<<" - ";
+        for (auto f : e.second)
+        {
+            std::cout<<f<<" ";
+        }
+        std::cout<<"\n";
+    }
+    
+
+
 
     return index;
 }

@@ -8,5 +8,7 @@ void Index::adicionar(std::string word, int id_arquivo) {
         filesMap.insert({word, {id_arquivo}});
         return;
     }
+    for(auto e : it->second) if(e == id_arquivo) return;
+    
     it->second.push_back(id_arquivo); 
 }
