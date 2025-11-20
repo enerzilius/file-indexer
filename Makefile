@@ -1,2 +1,2 @@
-all: main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp
-	g++ -o main main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp 
+all: main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp ./src/Index.cpp ./src/Indexer.cpp
+	g++ -o main main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp ./src/Index.cpp ./src/Indexer.cpp

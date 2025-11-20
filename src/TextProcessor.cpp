@@ -11,6 +11,7 @@
 #include <codecvt>
 
 std::vector<std::string> TextProcessor::processar(std::filesystem::path path) {
+	std::cout<<"\n Processando: "<<path<<"\n";
     std::string text = readTextFile(path);
 
     char delimiter = ' ';

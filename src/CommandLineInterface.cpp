@@ -3,27 +3,18 @@
 #include <unordered_map>
 #include "CommandLineInterface.h"
 #include "TextProcessor.h"
+#include "Indexer.h"
 
 void CLI::start() {
-    std::cout << "Iniciando indexador (por Eber Louback)..." << "\n";
+    std::cout << "Iniciando indexador..." << "\n";
 
     std::string input;
 
     TextProcessor textProcessor;
 
     while(true) {
-        auto vec = textProcessor.processar("texts/teste.txt");
-        std::cout<<"---------------------\n";
-        for (auto el : vec)
-        {
-            std::cout<<el<<"\n";
-        }
-        
-        
         std::cout<<" >> ";
         std::getline(std::cin, input);
-        std::cout<<"Executando: \'"<<input<<"\'...\n";
-
 
         const char delimiter = ' ';
         std::vector<std::string> splitString = textProcessor.split(input, delimiter);
@@ -48,7 +39,9 @@ void CLI::processInput(std::vector<std::string> commands) {
     }
 
     if(commands[1] == "construir") {
-        std::cout<<"\n [construir]: "<<commands[2];
+        std::cout<<"\n\n [construir]: "<<commands[2];
+        Indexer indexer;
+        indexer.construir(commands[2]);
     }
     if(commands[1] == "buscar") {
         std::cout<<"\n [buscar]: "<<commands[2];

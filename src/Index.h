@@ -10,5 +10,5 @@ public:
     std::vector<std::string> getArquivosPorPalavra(std::string palavra);
     std::string getNomeAqruivoPorId(std::string id);
 private:
-    std::unordered_map<std::string, std::vector<int>> ids;
+    std::unordered_map<std::string, std::vector<int>> filesMap;
 };
