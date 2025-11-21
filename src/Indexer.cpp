@@ -23,18 +23,5 @@ Index Indexer::construir(std::filesystem::path diretorio) {
         i++;
     }
 
-    for (auto e : index.filesMap)
-    {
-        std::cout<<e.first<<" - ";
-        for (auto f : e.second)
-        {
-            std::cout<<f<<" ";
-        }
-        std::cout<<"\n";
-    }
-    
-
-
-
     return index;
 }
