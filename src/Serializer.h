@@ -1,10 +1,11 @@
 #pragma once
 
-#include <string>
+#include <unordered_map>
+#include <filesystem>
 #include "Index.h"
 
 class Serializer {
 public:
-    void salvar(std::string index, std::string arquivo);
+    void salvar(Index index, std::filesystem::path directory);
     Index carregar(std::string arquivo);
 };

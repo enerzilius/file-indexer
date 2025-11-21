@@ -4,6 +4,8 @@
 #include "CommandLineInterface.h"
 #include "TextProcessor.h"
 #include "Indexer.h"
+#include "Index.h"
+#include "Serializer.h"
 
 void CLI::start() {
     std::cout << "Iniciando indexador..." << "\n";
@@ -41,7 +43,8 @@ void CLI::processInput(std::vector<std::string> commands) {
     if(commands[1] == "construir") {
         std::cout<<"\n\n [construir]: "<<commands[2];
         Indexer indexer;
-        indexer.construir(commands[2]);
+        Index index = indexer.construir(commands[2]);
+
     }
     if(commands[1] == "buscar") {
         std::cout<<"\n [buscar]: "<<commands[2];
