@@ -8,7 +8,7 @@
 #include "TextProcessor.h"
 
 Index Indexer::construir(std::filesystem::path diretorio) {
-    Index index;
+    Index index(diretorio);
     if(!std::filesystem::exists(diretorio)) {
 		std::cout<<"\n  [!] Caminho não existe: "<<diretorio.string()<<"\n";
 		return index;
