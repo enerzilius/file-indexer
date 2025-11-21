@@ -1,4 +1,4 @@
-de 
+de  
 a 
 o 
 que 
@@ -218,3 +218,4 @@ terão
 teria
 teríamos
 teriam
+-

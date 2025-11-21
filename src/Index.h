@@ -13,4 +13,5 @@ public:
     void adicionar(std::string word, int id_arquivo);
     std::vector<int> getArquivosPorPalavra(std::string palavra);
     std::string getNomeArquivoPorId(int id);
+    void printContent();
 };

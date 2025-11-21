@@ -45,4 +45,15 @@ std::string Index::getNomeArquivoPorId(int id) {
         if(i == id) return entry.path().string();
         i++;
     }
+    std::cout<<" [!] Arquivo não encontrado, tente refazer o índice deste diretório.";
+    return "";
+}
+
+void Index::printContent() {
+    std::cout<<"\n Diretório: "<<directory<<"\n";
+    for(auto pair : filesMap) {
+        std::cout<<"Chave: "<<pair.first<<" - ";
+        for(auto id : pair.second) std::cout<<id<<" ";
+        std::cout<<"\n";
+    }
 }

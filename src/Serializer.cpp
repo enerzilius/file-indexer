@@ -5,12 +5,15 @@
 
 void Serializer::salvar(Index index, std::filesystem::path directory) {
     if(!std::filesystem::exists(directory)) {
-		std::cout<<"\n  [!] Diretório não existe: "<<directory.string()<<"\n";
+        std::cout<<"\n  [!] Diretório não existe: "<<directory.string()<<"\n";
         return;
 	}
-
+    
     std::string fileName = directory.string() + "/index.dat";
-    std::cout<<fileName<<"\n";
+    if (std::filesystem::exists(fileName)) {
+        std::filesystem::remove(fileName);
+    }
+    std::cout<<" SERIALIZER - Salvando arquivo "<<fileName<<"\n";
     std::ofstream file;
     file.open(fileName, std::ios::binary);
     if(!file) {
@@ -40,6 +43,7 @@ void Serializer::salvar(Index index, std::filesystem::path directory) {
 }
 
 Index Serializer::carregar(std::filesystem::path path) {
+    std::cout<<" SERIALIZER - lendo arquivo: "<<path<<"\n";
     Index index("");
     if(!std::filesystem::is_regular_file(path)) {
         std::cout<<"  [!] Há um problema com o arquivo: "<<path.string()<<"\n";

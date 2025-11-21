@@ -41,10 +41,15 @@ void CLI::processInput(std::vector<std::string> commands) {
     }
 
     if(commands[1] == "construir") {
-        std::cout<<"\n\n [construir]: "<<commands[2];
+        std::filesystem::path directory = commands[2];
+        std::cout<<"\n\n [construir]: "<<directory.string();
         Indexer indexer;
-        Index index = indexer.construir(commands[2]);
-
+        Index index = indexer.construir(directory);
+        Serializer serializer;
+        serializer.salvar(index, directory);
+        std::string file = directory.string() + "/index.dat";  
+        Index novo = serializer.carregar(file);
+        novo.printContent();       
     }
     if(commands[1] == "buscar") {
         std::cout<<"\n [buscar]: "<<commands[2];
