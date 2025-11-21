@@ -7,5 +7,5 @@
 class Serializer {
 public:
     void salvar(Index index, std::filesystem::path directory);
-    Index carregar(std::string arquivo);
+    Index carregar(std::filesystem::path path);
 };
