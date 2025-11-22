@@ -32,7 +32,6 @@ std::vector<int> Index::getArquivosPorPalavra(std::string palavra) {
 }
 
 std::string Index::getNomeArquivoPorId(int id) {
-    std::cout<<" [*] Se você adicionou, removeu ou alterou algum arquivo deste diretório, refaça o build para evitar erros. \n";
     if(!std::filesystem::exists(directory)) {
 		std::cout<<"\n  [!] Diretório não existe: "<<directory.string()<<"\n";
 		return "";

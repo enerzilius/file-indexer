@@ -1,2 +1,2 @@
-all: main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp ./src/Index.cpp ./src/Indexer.cpp ./src/Serializer.cpp
-	g++ -o main main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp ./src/Index.cpp ./src/Indexer.cpp ./src/Serializer.cpp
+all: main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp ./src/Index.cpp ./src/Indexer.cpp ./src/Serializer.cpp ./src/QueryProcessor.cpp
+	g++ -o main main.cpp ./src/CommandLineInterface.cpp ./src/TextProcessor.cpp ./src/Index.cpp ./src/Indexer.cpp ./src/Serializer.cpp ./src/QueryProcessor.cpp

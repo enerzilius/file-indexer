@@ -7,6 +7,7 @@
 #include "Indexer.h"
 #include "Index.h"
 #include "Serializer.h"
+#include "QueryProcessor.h"
 
 void CLI::start() {
     std::cout<< "\n\n    INDEXADOR DE ARQUIVOS" << "\n\n";
@@ -59,7 +60,9 @@ void CLI::processInput(std::vector<std::string> commands) {
         serializer.salvar(index, directory);       
     }
     if(commands[1] == "buscar") {
-        std::cout<<"\n [buscar]: "<<commands[2];
+        std::cout<<"\n [buscar]: "<<commands[2]<<"\n\n";
+        QueryProcessor queryProcessor;
+        queryProcessor.buscar(commands);
     }
     if(commands[1] == "limpar") {
         std::cout<<"\n [limpar]\n";
