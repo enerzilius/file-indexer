@@ -11,7 +11,8 @@
 
 void CLI::start() {
     std::cout<< "\n\n    INDEXADOR DE ARQUIVOS" << "\n\n";
-    std::cout<<" Comandos:\n $ indice construir <diretorio>\n $ indice buscar <termo_de_busca> # Pode usar mais de um termo de busca.\n";
+    std::cout<<" Comandos:\n $ indice construir <diretorio> # Constroi o índice inverso do diretório.\n"; 
+    std::cout<<" $ indice buscar <termo_de_busca> # Pode usar mais de um termo de busca.\n";
     std::cout<<" $ indice limpar # Exclui o arquivo index.dar\n\n";
 
     availableCommands.insert("construir");
@@ -60,7 +61,7 @@ void CLI::processInput(std::vector<std::string> commands) {
         serializer.salvar(index, directory);       
     }
     if(commands[1] == "buscar") {
-        std::cout<<"\n [buscar]: "<<commands[2]<<"\n\n";
+        std::cout<<"\n [buscar]\n\n";
         QueryProcessor queryProcessor;
         queryProcessor.buscar(commands);
     }
