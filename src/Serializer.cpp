@@ -9,7 +9,7 @@ void Serializer::salvar(Index index, std::filesystem::path directory) {
         return;
 	}
     
-    std::string fileName = directory.string() + "/index.dat";
+    std::string fileName = "index.dat";
     if (std::filesystem::exists(fileName)) {
         std::filesystem::remove(fileName);
     }

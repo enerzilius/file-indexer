@@ -1,8 +1,9 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class QueryProcessor {
 public:
-    std::string* buscar(std::string consulta);
+    void buscar(std::vector<std::string> consulta);
 };

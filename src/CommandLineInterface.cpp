@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include "CommandLineInterface.h"
 #include "TextProcessor.h"
 #include "Indexer.h"
@@ -8,7 +9,13 @@
 #include "Serializer.h"
 
 void CLI::start() {
-    std::cout << "Iniciando indexador..." << "\n";
+    std::cout<< "\n\n    INDEXADOR DE ARQUIVOS" << "\n\n";
+    std::cout<<" Comandos:\n $ indice construir <diretorio>\n $ indice buscar <termo_de_busca> # Pode usar mais de um termo de busca.\n";
+    std::cout<<" $ indice limpar # Exclui o arquivo index.dar\n\n";
+
+    availableCommands.insert("construir");
+    availableCommands.insert("buscar");
+    availableCommands.insert("limpar");
 
     std::string input;
 
@@ -28,13 +35,13 @@ void CLI::start() {
 }
 
 void CLI::processInput(std::vector<std::string> commands) {
-    if(commands.size() < 2 || commands[0] != "indice" || (commands[1] != "construir" && commands[1] != "buscar")) {
+    if(commands.size() < 2 || availableCommands.count(commands[1]) <= 0) {
         std::cout<< "\n [!] Comando inválido...\n";
-        std::cout<<"     Use os seguintes comandos: `indice construir <caminho_do_diretorio>` ou `indice buscar <termo_de_busca>`\n";
+        std::cout<<"     Use os comandos listados ao inicializar a aplicação.\n";
         return;
     }
 
-    if(commands.size() < 3) {
+    if(commands.size() < 3 && commands[1] != "limpar") {
         std::cout<< "\n [!] Diretório ou termo de busca não específicados...\n";
         std::cout<<"     Use: `indice construir <caminho_do_diretorio>` ou `indice buscar <termo_de_busca>`\n";
         return;
@@ -43,15 +50,22 @@ void CLI::processInput(std::vector<std::string> commands) {
     if(commands[1] == "construir") {
         std::filesystem::path directory = commands[2];
         std::cout<<"\n\n [construir]: "<<directory.string();
+        
         Indexer indexer;
         Index index = indexer.construir(directory);
+
+        if(index.filesMap.empty()) return;
         Serializer serializer;
-        serializer.salvar(index, directory);
-        std::string file = directory.string() + "/index.dat";  
-        Index novo = serializer.carregar(file);
-        novo.printContent();       
+        serializer.salvar(index, directory);       
     }
     if(commands[1] == "buscar") {
         std::cout<<"\n [buscar]: "<<commands[2];
+    }
+    if(commands[1] == "limpar") {
+        std::cout<<"\n [limpar]\n";
+        std::string fileName = "index.dat";
+        if (std::filesystem::exists(fileName)) {
+            std::filesystem::remove(fileName);
+        } 
     }
 }

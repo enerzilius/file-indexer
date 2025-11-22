@@ -1,5 +1,6 @@
 #include "QueryProcessor.h"
+#include <vector>
 
-std::string* QueryProcessor::buscar(std::string consulta) {
-    
+void QueryProcessor::buscar(std::vector<std::string> consulta) {
+           
 }

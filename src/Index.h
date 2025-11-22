@@ -10,7 +10,7 @@ public:
     std::unordered_map<std::string, std::vector<int>> filesMap;
     std::filesystem::path directory;
     Index(std::filesystem::path dir);
-    void adicionar(std::string word, int id_arquivo);
+    void adicionar(std::string word, int idArquivo);
     std::vector<int> getArquivosPorPalavra(std::string palavra);
     std::string getNomeArquivoPorId(int id);
     void printContent();

@@ -8,15 +8,15 @@ Index::Index(std::filesystem::path dir) {
     directory = dir;
 }
 
-void Index::adicionar(std::string word, int id_arquivo) {
+void Index::adicionar(std::string word, int idArquivo) {
     auto it = filesMap.find(word);
     if (it == filesMap.end()) {
-        filesMap.insert({word, {id_arquivo}});
+        filesMap.insert({word, {idArquivo}});
         return;
     }
-    for(auto e : it->second) if(e == id_arquivo) return;
+    for(auto e : it->second) if(e == idArquivo) return;
 
-    it->second.push_back(id_arquivo); 
+    it->second.push_back(idArquivo); 
 }
 
 std::vector<int> Index::getArquivosPorPalavra(std::string palavra) {
