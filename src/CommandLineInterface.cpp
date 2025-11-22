@@ -13,7 +13,7 @@ void CLI::start() {
     std::cout<< "\n\n    INDEXADOR DE ARQUIVOS" << "\n\n";
     std::cout<<" Comandos:\n $ indice construir <diretorio> # Constroi o índice inverso do diretório.\n"; 
     std::cout<<" $ indice buscar <termo_de_busca> # Pode usar mais de um termo de busca.\n";
-    std::cout<<" $ indice limpar # Exclui o arquivo index.dar\n\n";
+    std::cout<<" $ indice limpar # Exclui o arquivo index.dat\n\n";
 
     availableCommands.insert("construir");
     availableCommands.insert("buscar");

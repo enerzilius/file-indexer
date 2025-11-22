@@ -15,7 +15,7 @@ void QueryProcessor::buscar(std::vector<std::string> consulta) {
     
     Serializer serializer;
     Index index = serializer.carregar(path);
-    std::cout<<" [*] Se você adicionou, removeu ou alterou algum arquivo do diretório:`"<<index.directory<<"` refaça o build para evitar erros. \n";
+    std::cout<<" [*] Se você adicionou, removeu ou alterou algum arquivo do diretório: "<<index.directory<<" refaça o build para evitar erros. \n";
 
     std::unordered_set<int> idsMap;
     std::vector<int> intersection = index.filesMap.find(consulta[2])->second;
@@ -33,7 +33,7 @@ void QueryProcessor::buscar(std::vector<std::string> consulta) {
         return;
     }
 
-    std::cout<<"\n Termo encontrado em: \n";
+    std::cout<<"\n Termo(s) encontrado(s) em: \n";
     for(int id :idsMap) {
         std::cout<<"  "<<index.getNomeArquivoPorId(id)<<"\n";
     }
