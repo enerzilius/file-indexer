@@ -14,7 +14,7 @@ Index Indexer::construir(std::filesystem::path diretorio) {
 		return index;
 	}
 
-    TextProcessor tp;
+    TextProcessor tp = TextProcessor();
     int i = 1;
     for(auto& entry : std::filesystem::directory_iterator(diretorio)) {
         if(!std::filesystem::is_regular_file(entry.path())) continue;

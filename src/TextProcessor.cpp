@@ -10,17 +10,28 @@
 #include <locale>
 #include <codecvt>
 
-std::vector<std::string> TextProcessor::processar(std::filesystem::path path) {
+TextProcessor::TextProcessor() {
+	std::filesystem::path path = "stopwords.txt";
+	std::string rawStopWords = readTextFile(path);
+	std::vector<std::string> stopWords = split(rawStopWords, ' ');
+	for (auto& word : stopWords) trim(word);
+
+	for(auto& word : stopWords) stopWordsSet.insert(word);
+}
+
+std::unordered_set<std::string> TextProcessor::processar(std::filesystem::path path) {
 	std::cout<<"\n Processando: "<<path<<"\n";
     std::string text = readTextFile(path);
 
     char delimiter = ' ';
-	std::vector<std::string> processed = split(text, delimiter);
-	lowerText(processed);
-	for (auto& word : processed) trim(word);
-	clean(processed);
+	std::vector<std::string> wordVector = split(text, delimiter);
+	std::unordered_set<std::string> wordsSet;
+	for(auto& word : wordVector) wordsSet.insert(word);
+	lowerText(wordsSet);
+	trimText(wordsSet);
+	clean(wordsSet);
 
-	return processed;
+	return wordsSet;
 }
 
 std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
@@ -42,7 +53,7 @@ std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
     return content;
 }
 
-std::vector<std::string> TextProcessor::split(std::string& text, const char& delimiter) {
+std::vector<std::string> split(std::string& text, const char& delimiter) {
 	std::stringstream stream(text);
 	std::vector<std::string> res;
 	std::string segment;
@@ -53,39 +64,44 @@ std::vector<std::string> TextProcessor::split(std::string& text, const char& del
 	return res;
 }
 
-void TextProcessor::lowerText(std::vector<std::string>& textVector) {
-	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-    for (std::string& word : textVector) {
-		std::wstring ws = conv.from_bytes(word);
+void TextProcessor::lowerText(std::unordered_set<std::string>& text) {
+    std::unordered_set<std::string> lowered;
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
 
-		std::locale loc("C.UTF-8");
-		for (wchar_t& wc : ws) {
-			wc = std::tolower(wc, loc);
-		}
+    std::locale loc("C.UTF-8");
 
-		word = conv.to_bytes(ws);
+    for (const auto& word : text) {
+        std::wstring ws = conv.from_bytes(word);
+        for (wchar_t& wc : ws) {
+            wc = std::tolower(wc, loc);
+        }
+        lowered.insert(conv.to_bytes(ws));
     }
+
+    text.swap(lowered);
+}
+void TextProcessor::trimText(std::unordered_set<std::string>& text) {
+    std::unordered_set<std::string> trimmed;
+
+    for (const auto& word : text) {
+		trimmed.insert(trim(word));
+    }
+
+    text.swap(trimmed);
 }
 
-void TextProcessor::clean(std::vector<std::string>& textVector) {
-	std::filesystem::path path = "stopwords.txt";
-	std::string rawStopWords = readTextFile(path);
-	std::vector<std::string> stopWords = split(rawStopWords, ' ');
-	for (auto& word : stopWords) trim(word);
+void TextProcessor::clean(std::unordered_set<std::string>& text) {
+	auto it = text.begin();
 
-	std::unordered_set<std::string> stopsHash;
-	for(auto& word : stopWords) stopsHash.insert(word);
-	
-	auto it = textVector.begin();
-
-	while (it != textVector.end()) {
+	while (it != text.end()) {
 		bool check = *it == "\n" || *it == "";
-		if (stopsHash.count(*it) > 0 || check) it = textVector.erase(it);
+		if (stopWordsSet.count(*it) > 0 || check) it = text.erase(it);
 		else ++it;
 	} 
 }
 
-void TextProcessor::trim(std::string& word) {
+std::string TextProcessor::trim(std::string word) {
 	word.erase(0,word.find_first_not_of(" \n\r\t"));
     word.erase(word.find_last_not_of(" \n\r\t")+1);
+	return word;
 }

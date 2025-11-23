@@ -3,14 +3,19 @@
 #include <vector>
 #include <string>
 #include <filesystem>
+#include <unordered_set>
 
 class TextProcessor {
 public:
-    std::vector<std::string> processar(std::filesystem::path path); 
-    std::vector<std::string> split(std::string& text, const char& delimiter);
+    TextProcessor();
+    std::unordered_set<std::string> processar(std::filesystem::path path); 
 private:
+    std::unordered_set<std::string> stopWordsSet;
     std::string readTextFile(const std::filesystem::path& path);
-    void lowerText(std::vector<std::string>& textVector);
-    void clean(std::vector<std::string>& textVector);
-    void trim(std::string& word);
+    void lowerText(std::unordered_set<std::string>& text);
+    void trimText(std::unordered_set<std::string>& text);
+    void clean(std::unordered_set<std::string>& text);
+    std::string trim(std::string word);
 };
+
+std::vector<std::string> split(std::string& text, const char& delimiter);

@@ -21,14 +21,12 @@ void CLI::start() {
 
     std::string input;
 
-    TextProcessor textProcessor;
-
     while(true) {
         std::cout<<" >> ";
         std::getline(std::cin, input);
 
         const char delimiter = ' ';
-        std::vector<std::string> splitString = textProcessor.split(input, delimiter);
+        std::vector<std::string> splitString = split(input, delimiter);
 
          processInput(splitString);
         
