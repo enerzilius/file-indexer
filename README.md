@@ -15,3 +15,5 @@ $ make && ./main
 >> indice construir <dir_path>  # Processes the files inside the specified directory and builds its inverted index and saves it as index.dat  
 >> indice buscar <search_term> # If there is a `index.dat` file in the directory it is loaded and prints the relevant files
 ```
+
+- Just use `ctrl+c` to exit the program.
