@@ -14,6 +14,8 @@ Index Indexer::construir(std::filesystem::path diretorio) {
 		return index;
 	}
 
+    // Se o diretório existir, adiciona as palavras dos arquivos junto do id (a posição atual no diretório) no index
+    // Funciona perfeitamente bem se não houver nenhuma alteração nos arquivos do diretório, se houver precisa de um rebuild
     TextProcessor tp = TextProcessor();
     int i = 1;
     for(auto& entry : std::filesystem::directory_iterator(diretorio)) {

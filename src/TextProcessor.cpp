@@ -11,6 +11,7 @@
 #include <codecvt>
 
 TextProcessor::TextProcessor() {
+	// Carrega as stopwords e as coloca em um unordered_set assim que a classe textProcessor é instanciada
 	std::filesystem::path path = "stopwords.txt";
 	std::string rawStopWords = readTextFile(path);
 	std::vector<std::string> stopWords = split(rawStopWords, ' ');
@@ -21,7 +22,12 @@ TextProcessor::TextProcessor() {
 
 std::unordered_set<std::string> TextProcessor::processar(std::filesystem::path path) {
 	std::cout<<"\n Processando: "<<path<<"\n";
-    std::string text = readTextFile(path);
+	/* 
+		Lê o arquivo de texto e divide a string em um vetor de palavras, 
+	   	as coloca em um set e depois diminui remove os caracteres indesejados
+		e por fim exclui as palavras dentro do stopwords do set e retorna o resultado
+	*/
+	std::string text = readTextFile(path);
 
     char delimiter = ' ';
 	std::vector<std::string> wordVector = split(text, delimiter);
@@ -45,6 +51,8 @@ std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
 		return "";
 	}
 
+	// Se não tiver nenhum problema com o arquivo, lê todo o conteúdo do arquivo e coloca em uma string
+
     auto size = std::filesystem::file_size(path);
     std::string content(size, '\0');
     std::ifstream in(path);
@@ -54,6 +62,7 @@ std::string TextProcessor::readTextFile(const std::filesystem::path& path) {
 }
 
 std::vector<std::string> split(std::string& text, const char& delimiter) {
+	// Usa o stringstream e o getline do std para dividir o conteúdo com base no delimiter
 	std::stringstream stream(text);
 	std::vector<std::string> res;
 	std::string segment;
@@ -68,8 +77,10 @@ void TextProcessor::lowerText(std::unordered_set<std::string>& text) {
     std::unordered_set<std::string> lowered;
     std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
 
+	// Aqui usa o locale C.UTF-8 pra poder diminuir os caracteres com acento
     std::locale loc("C.UTF-8");
 
+	// cria uma cópia da palavra em minúsculo e depois faz o swap dos dois
     for (const auto& word : text) {
         std::wstring ws = conv.from_bytes(word);
         for (wchar_t& wc : ws) {
@@ -80,6 +91,7 @@ void TextProcessor::lowerText(std::unordered_set<std::string>& text) {
 
     text.swap(lowered);
 }
+
 void TextProcessor::trimText(std::unordered_set<std::string>& text) {
     std::unordered_set<std::string> trimmed;
 
@@ -92,7 +104,7 @@ void TextProcessor::trimText(std::unordered_set<std::string>& text) {
 
 void TextProcessor::clean(std::unordered_set<std::string>& text) {
 	auto it = text.begin();
-
+	// Remove palavras indesejadas do set
 	while (it != text.end()) {
 		bool check = *it == "\n" || *it == "";
 		if (stopWordsSet.count(*it) > 0 || check) it = text.erase(it);
@@ -100,6 +112,7 @@ void TextProcessor::clean(std::unordered_set<std::string>& text) {
 	} 
 }
 
+// Limpa a palavra se tiver algum caracter problemático (quebra de linha e etc.)
 std::string TextProcessor::trim(std::string word) {
 	word.erase(0,word.find_first_not_of(" \n\r\t"));
     word.erase(word.find_last_not_of(" \n\r\t")+1);
