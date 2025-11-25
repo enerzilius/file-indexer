@@ -1,19 +1,22 @@
 # file-indexer
 
-## How does it work?
+## Como funciona?
 
-This is a simple command-line application that simulates a text file search mechanism. It reads the files, builds an inverted index and saves it as a file. After that, it is possible to search for keywords, returning a list of documents that have the desired search term.
+Este é um aplicativo simples de linha de comando que simula um mecanismo de busca em arquivos de texto. Ele lê os arquivos, constrói um índice invertido e o salva em um arquivo. Depois disso, é possível buscar palavras-chave, retornando uma lista de documentos que contêm o termo pesquisado.
 
-## Building and running
+## Construindo e executando
 
-- Run (on Linux):
+* Execute (no Linux):
+
 ```bash
 $ make && ./main
 ```
-- That will put you inside the app's CLI. You can then run your desired commands:
+
+* Isso colocará você dentro da interface de linha de comando (CLI) do aplicativo. Você poderá então executar os comandos desejados:
+
 ```bash
->> indice construir <dir_path>  # Processes the files inside the specified directory and builds its inverted index and saves it as index.dat  
->> indice buscar <search_term> # If there is a `index.dat` file in the directory it is loaded and prints the relevant files
+>> indice construir <caminho_do_diretorio>  # Processa os arquivos dentro do diretório especificado, constrói o índice invertido e o salva como index.dat  
+>> indice buscar <termo_de_busca>          # Se existir um arquivo `index.dat` no diretório, ele é carregado e imprime os arquivos relevantes
 ```
 
-- Just use `ctrl+c` to exit the program.
+* Use `ctrl+c` para sair do programa.
