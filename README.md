@@ -17,3 +17,5 @@ $ make && ./main
 ```
 
 - Just use `ctrl+c` to exit the program.
+
+<img width="1469" height="288" alt="image" src="https://github.com/user-attachments/assets/6d537096-682c-46f0-9624-0417cf53a02d" />
